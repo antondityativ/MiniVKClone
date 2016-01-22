@@ -1,0 +1,18 @@
+//
+//  PrefixHeader.pch
+//  MiniVKClone
+//
+//  Created by Антон Дитятив on 22.01.16.
+//  Copyright © 2016 Антон Дитятив. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#define screenWidth [UIScreen mainScreen].bounds.size.width
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+#define statusBarOffset 20
+#define navigationBarHeight 64
+
+#endif /* PrefixHeader_pch */
