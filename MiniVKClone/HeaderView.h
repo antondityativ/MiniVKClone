@@ -10,4 +10,6 @@
 
 @interface HeaderView : UIView
 
+-(void)setupHeaderFrom:(NewsModel *)model;
+
 @end

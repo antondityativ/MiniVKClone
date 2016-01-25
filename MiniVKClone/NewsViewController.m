@@ -67,7 +67,7 @@
 - (void)loadData {
     NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
     __weak __typeof(self) welf = self;
-        self.callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{@"user_id":[session valueForKey:@"user_id"],@"count":@50,@"new_offset":@50,@"filters":@"post"}];
+        self.callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{@"user_id":[session valueForKey:@"user_id"],@"count":@50,@"start_from":[NSNumber numberWithInteger:_newsArray.count],@"filters":@"post"}];
     [self.callingRequest executeWithResultBlock:^(VKResponse *response)
     {
         if ([response.json isKindOfClass:[NSDictionary class]]) {
@@ -76,16 +76,15 @@
                 for(NSDictionary *dict in items) {
                     _model = [NewsModel new];
                     [_model updateWithDictionary:dict];
-                    if(![[dict valueForKey:@"type"] isEqualToString:@"wall_photo"] && ![[dict valueForKey:@"type"] isEqualToString:@"video"]&& ![[dict valueForKey:@"type"] isEqualToString:@"video"])
                     [_newsArray addObject:_model];
                 }
-                [_newsTableView reloadData];
                         _loadMoreNews = NO;
             }else {
                         _loadMoreNews = YES;
             }
             [_ai stopAnimating];
             [self.refreshControl endRefreshing];
+            [_newsTableView reloadData];
         }
 
         welf.callingRequest = nil;
@@ -135,10 +134,6 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NewsTableViewCell *cell;
-    if (!cell) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    }
     return 350;
 }
 
@@ -169,7 +164,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!_loadMoreNews && scrollView.contentOffset.y > scrollView.contentSize.height - _newsTableView.bounds.size.height) {
         _loadMoreNews = YES;
-        if (_newsArray.count >= 5) {
+        if (_newsArray.count >= 50) {
             [_ai startAnimating];
             [self loadData];
         }

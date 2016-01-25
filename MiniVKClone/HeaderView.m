@@ -39,11 +39,18 @@
 -(UILabel *)nameLabel {
     if(!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        [_nameLabel setText:@"TEST USER"];
         [_nameLabel sizeToFit];
+        [_nameLabel setBackgroundColor:[UIColor redColor]];
+        [_nameLabel setFrame:CGRectMake(CGRectGetMaxX(_avatarImage.frame), 10, _nameLabel.frame.size.width, _nameLabel.frame.size.height)];
     }
     
     return _nameLabel;
+}
+
+-(void)setupHeaderFrom:(NewsModel *)model {
+    [_avatarImage setImageWithURL:model.profileAvatar];
+    [_nameLabel setText:model.profileName];
+    NSLog(@"%@", _nameLabel.text);
 }
 
 -(void)layoutSubviews {

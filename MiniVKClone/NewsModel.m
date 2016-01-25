@@ -11,7 +11,6 @@
 @implementation NewsModel
 
 -(void)updateWithDictionary:(NSDictionary *)dict {
-    
     if([[dict valueForKey:@"text"]isKindOfClass:[NSString class]]) {
         self.text = [dict valueForKey:@"text"];
     }
@@ -40,6 +39,42 @@
             self.image = [[[[dict valueForKey:@"attachments"] objectAtIndex:0] valueForKey:@"video"] valueForKey:@"photo_640"];
         }
     }
+
+    
+    NSInteger source_id = [[dict valueForKey:@"source_id"] integerValue];
+    NSLog(@"%li", (long)source_id);
+    VKRequest *request;
+    if(source_id < 0) {
+          request = [[VKApi groups] getById:@{@"group_id":[NSNumber numberWithInteger:-source_id]}];
+    }
+    else {
+        request = [[VKApi users] get:@{@"user_ids":[NSNumber numberWithInteger:source_id]}];
+    }
+    
+    [request executeWithResultBlock:^(VKResponse *response) {
+        if([[[response.json objectAtIndex:0]valueForKey:@"type"]isEqualToString:@"group"]) {
+            self.profileName = [[response.json objectAtIndex:0]valueForKey:@"name"];
+            self.profileAvatar = [[response.json objectAtIndex:0]valueForKey:@"photo_50"];
+        }
+        else if ([[[response.json objectAtIndex:0]valueForKey:@"type"]isEqualToString:@"page"]) {
+            self.profileName = [[response.json objectAtIndex:0]valueForKey:@"name"];
+            self.profileAvatar = [[response.json objectAtIndex:0]valueForKey:@"photo_50"];
+        }
+        else {
+            self.profileName = [NSString stringWithFormat:@"%@ %@", [[response.json objectAtIndex:0]valueForKey:@"first_name"],[[response.json objectAtIndex:0]valueForKey:@"last_name"]];
+            self.profileAvatar = [[response.json objectAtIndex:0]valueForKey:@"photo_100"];
+            if(self.profileAvatar == nil) {
+                self.profileAvatar = [[response.json objectAtIndex:0]valueForKey:@"photo_50"];
+            }
+            if(self.profileAvatar == nil) {
+                self.profileAvatar = [[response.json objectAtIndex:0]valueForKey:@"photo_200"];
+            }
+            
+        }
+    } errorBlock:^(NSError *error) {
+        
+    }];
+    
 }
 
 @end

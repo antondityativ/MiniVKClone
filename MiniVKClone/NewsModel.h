@@ -17,6 +17,8 @@
 @property(strong,nonatomic)NSString *reposts;
 @property(strong,nonatomic)NSString *image;
 @property(strong,nonatomic)NSString *date;
+@property(strong,nonatomic)NSString *profileName;
+@property(strong,nonatomic)NSString *profileAvatar;
 
 
 @end

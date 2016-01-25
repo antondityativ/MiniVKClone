@@ -12,6 +12,8 @@
 @interface NewsTableViewCell()
 
 @property(strong, nonatomic)HeaderView *headerView;
+@property(strong, nonatomic)WebImageView *avatarImage;
+@property(strong, nonatomic)UILabel *nameLabel;
 @property(strong, nonatomic)UILabel *datePostPublicate;
 @property(strong, nonatomic)UILabel *postNameLabel;
 @property(strong, nonatomic)UILabel *likesLabel;
@@ -24,7 +26,8 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self) {
-        [self.contentView addSubview:self.headerView];
+        [self.contentView addSubview:self.avatarImage];
+        [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.datePostPublicate];
         [self.contentView addSubview:self.postNameLabel];
         [self.contentView addSubview:self.likesLabel];
@@ -35,11 +38,30 @@
     return self;
 }
 
--(HeaderView *)headerView {
-    if(!_headerView) {
-        _headerView = [[HeaderView alloc] init];
+//-(HeaderView *)headerView {
+//    if(!_headerView) {
+//        _headerView = [[HeaderView alloc] init];
+//        [_headerView setFrame:CGRectMake(0, 0, screenWidth, 40)];
+//    }
+//    return _headerView;
+//}
+
+-(WebImageView *)avatarImage {
+    if(!_avatarImage) {
+        _avatarImage = [[WebImageView alloc] init];
+        [_avatarImage setClipsToBounds:YES];
+        [_avatarImage setContentMode:UIViewContentModeScaleAspectFill];
     }
-    return _headerView;
+    return _avatarImage;
+}
+
+-(UILabel *)nameLabel {
+    if(!_nameLabel) {
+        _nameLabel = [[UILabel alloc] init];
+        [_nameLabel sizeToFit];
+    }
+    
+    return _nameLabel;
 }
 
 -(UILabel *)datePostPublicate {
@@ -86,6 +108,9 @@
 
 
 -(void)setupCellFromNews:(NewsModel *)model {
+//    [_headerView setupHeaderFrom:model];
+    [_avatarImage setImageWithURL:model.profileAvatar];
+    [_nameLabel setText:model.profileName];
     [_postNameLabel setText:model.text];
     if(model.likes) {
         [_likesLabel setText:[NSString stringWithFormat:@"Likes: %@",model.likes]];
@@ -116,8 +141,12 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     [_headerView setFrame:CGRectMake(0, 0, screenWidth, 40)];
+    [_avatarImage setFrame:CGRectMake(5, 0, 40, 40)];
+    _avatarImage.layer.cornerRadius = 20;
+    [_nameLabel sizeToFit];
+    [_nameLabel setFrame:CGRectMake(CGRectGetMaxX(_avatarImage.frame), 10, screenWidth - CGRectGetMaxX(_avatarImage.frame) - 20, _nameLabel.frame.size.height)];
     [_datePostPublicate sizeToFit];
-    [_datePostPublicate setFrame:CGRectMake(5, CGRectGetMaxY(_headerView.frame), _datePostPublicate.frame.size.width, _datePostPublicate.frame.size.height)];
+    [_datePostPublicate setFrame:CGRectMake(5, CGRectGetMaxY(_avatarImage.frame), _datePostPublicate.frame.size.width, _datePostPublicate.frame.size.height)];
     [_postNameLabel sizeToFit];
     CGRect frame = _postNameLabel.frame;
     if(frame.size.height > 60) {
