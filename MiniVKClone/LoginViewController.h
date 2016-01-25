@@ -8,30 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "API.h"
+#import "NewsViewController.h"
+@interface LoginViewController : UIViewController<UIWebViewDelegate, UITextFieldDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate,VKSdkUIDelegate,VKSdkDelegate>
 
-@interface LoginViewController : UIViewController<UIWebViewDelegate, UITextFieldDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate>
-{
-    UIScrollView *SV;
-    
-    UIButton *okButton;
-    UIButton *vkButton;
-    UIButton *fbButton;
-    UIButton *twitterButton;
-    UIButton *login;
-    UIButton *registration;
-    
-    UITextField *email;
-    UITextField *pass;
-    
-    UIWebView *loginWebView;
-    
-    NSString *user_id;
-    NSString *access_token;
-    
-    BOOL isCaptcha;
-    
-    CGSize keyboardSize;
-}
+@property (nonatomic, strong) UIScrollView *SV;
+@property (nonatomic, strong) UIButton *vkButton;
 @property (retain, nonatomic) UIActivityIndicatorView *loaderActivity;
 
 @property (nonatomic, strong) UIWebView *web;

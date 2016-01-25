@@ -20,6 +20,11 @@
 		6E7FE5151C5250B30023A3A0 /* ic_vk.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E7FE50F1C5250B30023A3A0 /* ic_vk.png */; };
 		6E7FE5161C5250B30023A3A0 /* ic_vk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E7FE5101C5250B30023A3A0 /* ic_vk@3x.png */; };
 		6E7FE5171C5250B30023A3A0 /* ic_vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E7FE5111C5250B30023A3A0 /* ic_vk@2x.png */; };
+		6E7FE5201C529AB80023A3A0 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE51F1C529AB80023A3A0 /* NewsViewController.m */; };
+		6E7FE5241C52AA6B0023A3A0 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE5231C52AA6B0023A3A0 /* NewsTableViewCell.m */; };
+		6E7FE5281C52B2A60023A3A0 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE5271C52B2A60023A3A0 /* NewsModel.m */; };
+		6EA3CF581C53707E00BCF14A /* WebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF561C53707E00BCF14A /* WebImageView.m */; };
+		6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */; };
 		EBB36FCDADA9B7BDA44C8CFE /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B894DB7CDB2C715B6DC6099 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,16 @@
 		6E7FE50F1C5250B30023A3A0 /* ic_vk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vk.png; sourceTree = "<group>"; };
 		6E7FE5101C5250B30023A3A0 /* ic_vk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vk@3x.png"; sourceTree = "<group>"; };
 		6E7FE5111C5250B30023A3A0 /* ic_vk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vk@2x.png"; sourceTree = "<group>"; };
+		6E7FE51E1C529AB80023A3A0 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		6E7FE51F1C529AB80023A3A0 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		6E7FE5221C52AA6B0023A3A0 /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
+		6E7FE5231C52AA6B0023A3A0 /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
+		6E7FE5261C52B2A60023A3A0 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
+		6E7FE5271C52B2A60023A3A0 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
+		6EA3CF561C53707E00BCF14A /* WebImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebImageView.m; sourceTree = "<group>"; };
+		6EA3CF571C53707E00BCF14A /* WebImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebImageView.h; sourceTree = "<group>"; };
+		6EA3CF5A1C549B5C00BCF14A /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		98C0E0843D3CF7D421797463 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B3A11F9583C5E94A903798F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,22 +96,15 @@
 		6E7FE4EC1C52447C0023A3A0 /* MiniVKClone */ = {
 			isa = PBXGroup;
 			children = (
-				6E7FE50C1C5250B30023A3A0 /* ic_vk_fitback.png */,
-				6E7FE50D1C5250B30023A3A0 /* ic_vk_fitback@2x.png */,
-				6E7FE50E1C5250B30023A3A0 /* ic_vk_fitback@3x.png */,
-				6E7FE50F1C5250B30023A3A0 /* ic_vk.png */,
-				6E7FE5101C5250B30023A3A0 /* ic_vk@3x.png */,
-				6E7FE5111C5250B30023A3A0 /* ic_vk@2x.png */,
+				6EA3CF541C53706900BCF14A /* Helpers */,
+				6E7FE5251C52B2700023A3A0 /* NewsModel */,
 				6E7FE5081C524B8B0023A3A0 /* API */,
-				6E7FE4F01C52447C0023A3A0 /* AppDelegate.h */,
-				6E7FE4F11C52447C0023A3A0 /* AppDelegate.m */,
-				6E7FE4F31C52447C0023A3A0 /* LoginViewController.h */,
-				6E7FE4F41C52447C0023A3A0 /* LoginViewController.m */,
+				6E7FE51C1C529A0A0023A3A0 /* AppDelegate */,
 				6E7FE4FC1C52447C0023A3A0 /* Assets.xcassets */,
-				6E7FE4FE1C52447C0023A3A0 /* LaunchScreen.storyboard */,
-				6E7FE5011C52447C0023A3A0 /* Info.plist */,
-				6E7FE4F91C52447C0023A3A0 /* MiniVKClone.xcdatamodeld */,
+				6E7FE51D1C529A190023A3A0 /* CoreData */,
+				6E7FE51B1C5299F50023A3A0 /* resouces */,
 				6E7FE4ED1C52447C0023A3A0 /* Supporting Files */,
+				6E7FE5191C5299CA0023A3A0 /* ViewControllers */,
 			);
 			path = MiniVKClone;
 			sourceTree = "<group>";
@@ -104,6 +112,7 @@
 		6E7FE4ED1C52447C0023A3A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6E7FE5011C52447C0023A3A0 /* Info.plist */,
 				6E7FE4EE1C52447C0023A3A0 /* main.m */,
 				6E7FE5071C5249A70023A3A0 /* PrefixHeader.pch */,
 			);
@@ -117,6 +126,110 @@
 				6E7FE50A1C524B9F0023A3A0 /* API.m */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		6E7FE5181C5299B20023A3A0 /* NewsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE5211C52AA320023A3A0 /* NewsTableViewCell */,
+				6E7FE51E1C529AB80023A3A0 /* NewsViewController.h */,
+				6E7FE51F1C529AB80023A3A0 /* NewsViewController.m */,
+			);
+			name = NewsViewController;
+			sourceTree = "<group>";
+		};
+		6E7FE5191C5299CA0023A3A0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE51A1C5299DA0023A3A0 /* LoginViewController */,
+				6E7FE5181C5299B20023A3A0 /* NewsViewController */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6E7FE51A1C5299DA0023A3A0 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE4F31C52447C0023A3A0 /* LoginViewController.h */,
+				6E7FE4F41C52447C0023A3A0 /* LoginViewController.m */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		6E7FE51B1C5299F50023A3A0 /* resouces */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE50C1C5250B30023A3A0 /* ic_vk_fitback.png */,
+				6E7FE50D1C5250B30023A3A0 /* ic_vk_fitback@2x.png */,
+				6E7FE50E1C5250B30023A3A0 /* ic_vk_fitback@3x.png */,
+				6E7FE50F1C5250B30023A3A0 /* ic_vk.png */,
+				6E7FE5111C5250B30023A3A0 /* ic_vk@2x.png */,
+				6E7FE5101C5250B30023A3A0 /* ic_vk@3x.png */,
+			);
+			name = resouces;
+			sourceTree = "<group>";
+		};
+		6E7FE51C1C529A0A0023A3A0 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE4F01C52447C0023A3A0 /* AppDelegate.h */,
+				6E7FE4F11C52447C0023A3A0 /* AppDelegate.m */,
+				6E7FE4FE1C52447C0023A3A0 /* LaunchScreen.storyboard */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6E7FE51D1C529A190023A3A0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE4F91C52447C0023A3A0 /* MiniVKClone.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		6E7FE5211C52AA320023A3A0 /* NewsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF591C549B3E00BCF14A /* HeaderView */,
+				6E7FE5221C52AA6B0023A3A0 /* NewsTableViewCell.h */,
+				6E7FE5231C52AA6B0023A3A0 /* NewsTableViewCell.m */,
+			);
+			name = NewsTableViewCell;
+			sourceTree = "<group>";
+		};
+		6E7FE5251C52B2700023A3A0 /* NewsModel */ = {
+			isa = PBXGroup;
+			children = (
+				6E7FE5261C52B2A60023A3A0 /* NewsModel.h */,
+				6E7FE5271C52B2A60023A3A0 /* NewsModel.m */,
+			);
+			name = NewsModel;
+			sourceTree = "<group>";
+		};
+		6EA3CF541C53706900BCF14A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF551C53707000BCF14A /* WebImageView */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		6EA3CF551C53707000BCF14A /* WebImageView */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF561C53707E00BCF14A /* WebImageView.m */,
+				6EA3CF571C53707E00BCF14A /* WebImageView.h */,
+			);
+			name = WebImageView;
+			sourceTree = "<group>";
+		};
+		6EA3CF591C549B3E00BCF14A /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF5A1C549B5C00BCF14A /* HeaderView.h */,
+				6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */,
+			);
+			name = HeaderView;
 			sourceTree = "<group>";
 		};
 		ECCF5BBAEDF3C36E1BAA68BB /* Pods */ = {
@@ -263,10 +376,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E7FE4F51C52447C0023A3A0 /* LoginViewController.m in Sources */,
+				6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */,
 				6E7FE4F21C52447C0023A3A0 /* AppDelegate.m in Sources */,
 				6E7FE4EF1C52447C0023A3A0 /* main.m in Sources */,
+				6E7FE5201C529AB80023A3A0 /* NewsViewController.m in Sources */,
+				6EA3CF581C53707E00BCF14A /* WebImageView.m in Sources */,
+				6E7FE5281C52B2A60023A3A0 /* NewsModel.m in Sources */,
 				6E7FE4FB1C52447C0023A3A0 /* MiniVKClone.xcdatamodeld in Sources */,
 				6E7FE50B1C524B9F0023A3A0 /* API.m in Sources */,
+				6E7FE5241C52AA6B0023A3A0 /* NewsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +489,7 @@
 			baseConfigurationReference = B3A11F9583C5E94A903798F8 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = MiniVKClone/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniVKClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.MiniVKClone;
@@ -383,6 +502,7 @@
 			baseConfigurationReference = 98C0E0843D3CF7D421797463 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = MiniVKClone/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniVKClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.MiniVKClone;
