@@ -19,6 +19,7 @@
 @property(strong,nonatomic)NSString *date;
 @property(strong,nonatomic)NSString *profileName;
 @property(strong,nonatomic)NSString *profileAvatar;
+@property(strong,nonatomic)NSArray *photos;
 
 
 @end

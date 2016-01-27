@@ -8,27 +8,27 @@
 
 #import "LoginViewController.h"
 
-
-#define APP_DELEGATE            (AppDelegate *)[[UIApplication sharedApplication] delegate]
-#define ROOT_VIEW_CONTROLLER    (PRootViewController *)[APP_DELEGATE rootViewController]
-#define SIDE_MENU_CONTROLLER    ((PZSideMenuViewController *)[(PRootViewController *)ROOT_VIEW_CONTROLLER sideMenuViewController])
-
 #define VKid @"5237517"
 static NSArray *SCOPE = nil;
 
 @interface LoginViewController ()
+
+@property(strong,nonatomic) UIButton *vkButton;
+@property(strong,nonatomic) UIActivityIndicatorView *loaderActivity;
 @property(strong,nonatomic) VKRequest *callingRequest;
+@property(strong,nonatomic) UILabel *upTitle;
 @end
 
 @implementation LoginViewController
 
-@synthesize loaderActivity = _loaderActivity;
 int i = 0;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupUI];
+    self.title = @"LOGIN";
+    self.navigationController.navigationBar.translucent = YES;
     SCOPE = @[VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO, VK_PER_PHOTOS, VK_PER_NOHTTPS, VK_PER_EMAIL, VK_PER_MESSAGES, VK_PER_NOTES,VK_PER_DOCS];
     [super viewDidLoad];
     [[VKSdk initializeWithAppId:VKid] registerDelegate:self];
@@ -42,52 +42,50 @@ int i = 0;
     }];
 }
 
+#pragma mark - SetupUI
+
+-(UILabel *)upTitle {
+    if(!_upTitle) {
+        _upTitle = [[UILabel alloc] init];
+        [_upTitle setFrame:CGRectMake(28, 20, 300, 20)];
+        [_upTitle setText:@"Войдите через социальную сеть"];
+        [_upTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:18]];
+        [_upTitle setTextColor:[UIColor colorWithRed:109/255. green:109/255. blue:114/255. alpha:1.0]];
+        [_upTitle sizeToFit];
+        [_upTitle setFrame:CGRectMake(self.view.frame.size.width/2 - _upTitle.frame.size.width/2, 20, _upTitle.frame.size.width, _upTitle.frame.size.height)];
+    }
+    return _upTitle;
+}
+
+-(UIButton *)vkButton {
+    if(!_vkButton) {
+        _vkButton = [[UIButton alloc] initWithFrame:CGRectMake(100, _upTitle.frame.origin.y + _upTitle.frame.size.height + 20, 62, 62)];
+        [_vkButton setImage:[UIImage imageNamed:@"ic_vk"] forState:UIControlStateNormal];
+        [_vkButton setImage:[UIImage imageNamed:@"ic_vk_fitback"] forState:UIControlStateHighlighted];
+        [_vkButton setImage:[UIImage imageNamed:@"ic_vk_fitback"] forState:UIControlStateSelected];
+        [_vkButton addTarget:self action:@selector(vkAuth) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _vkButton;
+}
+
+-(UIActivityIndicatorView *)loaderActivity {
+    if(!_loaderActivity) {
+        _loaderActivity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _loaderActivity.center = CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2-self.navigationController.navigationBar.frame.size.height/2);
+    }
+    return _loaderActivity;
+}
+
 -(void)setupUI
 {
-    _SV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [_SV setBackgroundColor:[UIColor colorWithRed:239/255. green:239/255. blue:244/255. alpha:1.0]];
-    [_SV setUserInteractionEnabled:YES];
-    [_SV setScrollEnabled:YES];
-    _SV.scrollsToTop = YES;
-    [self.view addSubview:_SV];
+    [self.view addSubview:self.upTitle];
     
-    UILabel *upTitle = [[UILabel alloc] init];
-    [upTitle setFrame:CGRectMake(28, 20, 300, 20)];
-    [upTitle setText:@"Войдите через социальную сеть"];
-    [upTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:18]];
-    [upTitle setTextColor:[UIColor colorWithRed:109/255. green:109/255. blue:114/255. alpha:1.0]];
-    [upTitle sizeToFit];
-    [upTitle setFrame:CGRectMake(self.view.frame.size.width/2 - upTitle.frame.size.width/2, 20, upTitle.frame.size.width, upTitle.frame.size.height)];
-    [_SV addSubview:upTitle];
+    [self.view addSubview:self.vkButton];
     
-    _vkButton = [[UIButton alloc] initWithFrame:CGRectMake(100, upTitle.frame.origin.y + upTitle.frame.size.height + 20, 62, 62)];
-    [_vkButton setImage:[UIImage imageNamed:@"ic_vk"] forState:UIControlStateNormal];
-    [_vkButton setImage:[UIImage imageNamed:@"ic_vk_fitback"] forState:UIControlStateHighlighted];
-    [_vkButton setImage:[UIImage imageNamed:@"ic_vk_fitback"] forState:UIControlStateSelected];
-    [_vkButton addTarget:self action:@selector(vkAuth) forControlEvents:UIControlEventTouchUpInside];
-    [_SV addSubview:_vkButton];
-    
-    UIButton *changeBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(_vkButton.frame) + 30, 100, 50)];
-    [changeBtn setTitle:@"Change user" forState:UIControlStateNormal];
-    [changeBtn addTarget:self action:@selector(changeUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:changeBtn];
-    
-    _loaderActivity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _loaderActivity.center = CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height/2-self.navigationController.navigationBar.frame.size.height/2);
-    [self.view addSubview:_loaderActivity];
+    [self.view addSubview:self.loaderActivity];
 }
 
--(void)changeUser {
-    NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
-    [VKAccessToken delete:[session valueForKey:@"accessToken"]];
-    [VKSdk authorize:SCOPE];
-}
-
--(void)vkAuth
-{
-    [VKSdk authorize:SCOPE];
-}
-
+#pragma mark - VK delegate
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
     VKCaptchaViewController *vc = [VKCaptchaViewController captchaControllerWithError:captchaError];
@@ -119,16 +117,12 @@ int i = 0;
     [self.navigationController.topViewController presentViewController:controller animated:YES completion:nil];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"API_CALL"]) {
-
-    }
-}
-
 - (void)callMethod:(VKRequest *)method {
 
     [self performSegueWithIdentifier:@"API_CALL" sender:self];
 }
+
+#pragma mark - Actions
 
 -(void)startWorking {
     self->_callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{@"user_id":@45898586,@"count":@100}];
@@ -137,6 +131,13 @@ int i = 0;
     [self.navigationController pushViewController:vc animated:YES];
     self->_callingRequest = nil;
 }
+
+-(void)vkAuth
+{
+    [VKSdk authorize:SCOPE];
+}
+
+#pragma mark - Others
 
 - (void)didReceiveMemoryWarning
 {

@@ -25,6 +25,7 @@
 		6E7FE5281C52B2A60023A3A0 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE5271C52B2A60023A3A0 /* NewsModel.m */; };
 		6EA3CF581C53707E00BCF14A /* WebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF561C53707E00BCF14A /* WebImageView.m */; };
 		6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */; };
+		6EA3CF611C564CE400BCF14A /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF601C564CE400BCF14A /* DetailsViewController.m */; };
 		EBB36FCDADA9B7BDA44C8CFE /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B894DB7CDB2C715B6DC6099 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		6EA3CF571C53707E00BCF14A /* WebImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebImageView.h; sourceTree = "<group>"; };
 		6EA3CF5A1C549B5C00BCF14A /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		6EA3CF5F1C564CE400BCF14A /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		6EA3CF601C564CE400BCF14A /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		98C0E0843D3CF7D421797463 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B3A11F9583C5E94A903798F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +144,7 @@
 		6E7FE5191C5299CA0023A3A0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3CF5E1C564C9300BCF14A /* DetailsViewController */,
 				6E7FE51A1C5299DA0023A3A0 /* LoginViewController */,
 				6E7FE5181C5299B20023A3A0 /* NewsViewController */,
 			);
@@ -217,8 +221,8 @@
 		6EA3CF551C53707000BCF14A /* WebImageView */ = {
 			isa = PBXGroup;
 			children = (
-				6EA3CF561C53707E00BCF14A /* WebImageView.m */,
 				6EA3CF571C53707E00BCF14A /* WebImageView.h */,
+				6EA3CF561C53707E00BCF14A /* WebImageView.m */,
 			);
 			name = WebImageView;
 			sourceTree = "<group>";
@@ -230,6 +234,15 @@
 				6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */,
 			);
 			name = HeaderView;
+			sourceTree = "<group>";
+		};
+		6EA3CF5E1C564C9300BCF14A /* DetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF5F1C564CE400BCF14A /* DetailsViewController.h */,
+				6EA3CF601C564CE400BCF14A /* DetailsViewController.m */,
+			);
+			name = DetailsViewController;
 			sourceTree = "<group>";
 		};
 		ECCF5BBAEDF3C36E1BAA68BB /* Pods */ = {
@@ -377,6 +390,7 @@
 			files = (
 				6E7FE4F51C52447C0023A3A0 /* LoginViewController.m in Sources */,
 				6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */,
+				6EA3CF611C564CE400BCF14A /* DetailsViewController.m in Sources */,
 				6E7FE4F21C52447C0023A3A0 /* AppDelegate.m in Sources */,
 				6E7FE4EF1C52447C0023A3A0 /* main.m in Sources */,
 				6E7FE5201C529AB80023A3A0 /* NewsViewController.m in Sources */,
@@ -491,6 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = MiniVKClone/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniVKClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.MiniVKClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,6 +519,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = MiniVKClone/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniVKClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.MiniVKClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";

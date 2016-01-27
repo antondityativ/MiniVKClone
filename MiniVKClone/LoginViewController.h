@@ -11,14 +11,5 @@
 #import "NewsViewController.h"
 @interface LoginViewController : UIViewController<UIWebViewDelegate, UITextFieldDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate,VKSdkUIDelegate,VKSdkDelegate>
 
-@property (nonatomic, strong) UIScrollView *SV;
-@property (nonatomic, strong) UIButton *vkButton;
-@property (retain, nonatomic) UIActivityIndicatorView *loaderActivity;
-
-@property (nonatomic, strong) UIWebView *web;
-@property (nonatomic, strong) NSData *receivedData;
-//@property (nonatomic) ACAccountStore *accountStore;
-
-
 @end
 

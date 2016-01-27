@@ -11,7 +11,6 @@
 
 @interface NewsTableViewCell()
 
-@property(strong, nonatomic)HeaderView *headerView;
 @property(strong, nonatomic)WebImageView *avatarImage;
 @property(strong, nonatomic)UILabel *nameLabel;
 @property(strong, nonatomic)UILabel *datePostPublicate;
@@ -37,14 +36,6 @@
     
     return self;
 }
-
-//-(HeaderView *)headerView {
-//    if(!_headerView) {
-//        _headerView = [[HeaderView alloc] init];
-//        [_headerView setFrame:CGRectMake(0, 0, screenWidth, 40)];
-//    }
-//    return _headerView;
-//}
 
 -(WebImageView *)avatarImage {
     if(!_avatarImage) {
@@ -108,10 +99,11 @@
 
 
 -(void)setupCellFromNews:(NewsModel *)model {
-//    [_headerView setupHeaderFrom:model];
+    
     [_avatarImage setImageWithURL:model.profileAvatar];
     [_nameLabel setText:model.profileName];
     [_postNameLabel setText:model.text];
+    
     if(model.likes) {
         [_likesLabel setText:[NSString stringWithFormat:@"Likes: %@",model.likes]];
     }
@@ -126,12 +118,14 @@
 
         [_datePostPublicate setText:stringFromDate];
     }
-    if(self.imageViewq == nil) {
-        [_imageViewq setImageWithURL:model.image];
+    
+    if(model.image == nil) {
+        [_imageViewq setHidden:YES];
     }
     else {
-        [_imageViewq setImageWithURL:model.image];
+        [_imageViewq setHidden:NO];
     }
+    [_imageViewq setImageWithURL:model.image];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -140,13 +134,16 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    [_headerView setFrame:CGRectMake(0, 0, screenWidth, 40)];
+    
     [_avatarImage setFrame:CGRectMake(5, 0, 40, 40)];
     _avatarImage.layer.cornerRadius = 20;
+    
     [_nameLabel sizeToFit];
     [_nameLabel setFrame:CGRectMake(CGRectGetMaxX(_avatarImage.frame), 10, screenWidth - CGRectGetMaxX(_avatarImage.frame) - 20, _nameLabel.frame.size.height)];
+    
     [_datePostPublicate sizeToFit];
     [_datePostPublicate setFrame:CGRectMake(5, CGRectGetMaxY(_avatarImage.frame), _datePostPublicate.frame.size.width, _datePostPublicate.frame.size.height)];
+    
     [_postNameLabel sizeToFit];
     CGRect frame = _postNameLabel.frame;
     if(frame.size.height > 60) {
@@ -154,11 +151,12 @@
         _postNameLabel.frame = frame;
     }
     [_postNameLabel setFrame:CGRectMake(15, CGRectGetMaxY(_datePostPublicate.frame) + 10, screenWidth - 30, _postNameLabel.frame.size.height)];
+    
     [_likesLabel sizeToFit];
     [_likesLabel setFrame:CGRectMake(15, self.frame.size.height - _likesLabel.frame.size.height, _likesLabel.frame.size.width, _likesLabel.frame.size.height)];
-//    if(self.imageViewq.image) {
-        [_imageViewq setFrame:CGRectMake(15, CGRectGetMaxY(_postNameLabel.frame), screenWidth - 30,self.frame.size.height - _postNameLabel.frame.size.height - _likesLabel.frame.size.height - 80)];
-//    }
+    
+    [_imageViewq setFrame:CGRectMake(15, CGRectGetMaxY(_postNameLabel.frame), screenWidth - 30,self.frame.size.height - _postNameLabel.frame.size.height - _likesLabel.frame.size.height - 80)];
+    
     [_repostsLabel sizeToFit];
     [_repostsLabel setFrame:CGRectMake(screenWidth - _repostsLabel.frame.size.width - 15, _likesLabel.frame.origin.y, _repostsLabel.frame.size.width, _repostsLabel.frame.size.height)];
 }

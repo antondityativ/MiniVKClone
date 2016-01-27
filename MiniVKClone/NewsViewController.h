@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsTableViewCell.h"
+#import "DetailsViewController.h"
 
 
 @interface NewsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>

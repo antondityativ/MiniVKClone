@@ -41,29 +41,8 @@
     [self loadData];
 }
 
-
-#pragma mark - REFRESH
-
-- (void)refresh:(UIRefreshControl *)refreshControl {
-    _newsArray = [NSMutableArray new];
-    [self loadData];
-    
-    if (refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-    }
-    
-}
-
-
-
 #pragma mark - loadData
+
 - (void)loadData {
     NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
     __weak __typeof(self) welf = self;
@@ -119,13 +98,20 @@
         _newsTableView.delegate = self;
         _newsTableView.dataSource = self;
         [_newsTableView registerClass:[NewsTableViewCell class] forCellReuseIdentifier:@"cell"];
-        self.refreshControl = [[UIRefreshControl alloc] init];
-        [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
         [_newsTableView addSubview:self.refreshControl];
-        self.refreshControl.backgroundColor = [UIColor colorWithRed:0/255. green:165/255. blue:228/255. alpha:1];
-        self.refreshControl.tintColor = [UIColor whiteColor];
+
     }
     return _newsTableView;
+}
+
+-(UIRefreshControl *)refreshControl {
+    if(!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        [_refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+        _refreshControl.backgroundColor = [UIColor colorWithRed:0/255. green:165/255. blue:228/255. alpha:1];
+        _refreshControl.tintColor = [UIColor whiteColor];
+    }
+    return _refreshControl;
 }
 
 
@@ -134,6 +120,10 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsModel *model = [_newsArray objectAtIndex:indexPath.row];
+    if(model.image == nil) {
+        return 200;
+    }
     return 350;
 }
 
@@ -160,6 +150,13 @@
     return CGFLOAT_MIN;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    DetailsViewController *detailsViewController = [DetailsViewController new];
+    detailsViewController.model = [_newsArray objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+    
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!_loadMoreNews && scrollView.contentOffset.y > scrollView.contentSize.height - _newsTableView.bounds.size.height) {
@@ -179,12 +176,25 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - REFRESH
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    _newsArray = [NSMutableArray new];
+    [self loadData];
+    
+    if (refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+    }
 }
 
-#pragma mark - layout
+#pragma mark - Other
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -192,5 +202,9 @@
     [_newsTableView setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end
