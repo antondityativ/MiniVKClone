@@ -26,6 +26,23 @@
 		6EA3CF581C53707E00BCF14A /* WebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF561C53707E00BCF14A /* WebImageView.m */; };
 		6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */; };
 		6EA3CF611C564CE400BCF14A /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF601C564CE400BCF14A /* DetailsViewController.m */; };
+		6EA3CF701C591ED700BCF14A /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF691C591ED700BCF14A /* RightViewController.m */; };
+		6EA3CF711C591ED700BCF14A /* CenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF6A1C591ED700BCF14A /* CenterViewController.m */; };
+		6EA3CF721C591ED700BCF14A /* SlideNavigationMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF6D1C591ED700BCF14A /* SlideNavigationMainController.m */; };
+		6EA3CF731C591ED700BCF14A /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF6E1C591ED700BCF14A /* LeftViewController.m */; };
+		6EA3CF7C1C591F4800BCF14A /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF761C591F4800BCF14A /* MenuViewController.m */; };
+		6EA3CF7D1C591F4800BCF14A /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3CF771C591F4800BCF14A /* MenuViewController.xib */; };
+		6EA3CF7E1C591F4800BCF14A /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF781C591F4800BCF14A /* MenuTableViewCell.m */; };
+		6EA3CF7F1C591F4800BCF14A /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3CF791C591F4800BCF14A /* MenuTableViewCell.xib */; };
+		6EA3CF831C59274A00BCF14A /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3CF801C59274A00BCF14A /* menu.png */; };
+		6EA3CF841C59274B00BCF14A /* menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3CF811C59274A00BCF14A /* menu@3x.png */; };
+		6EA3CF851C59274B00BCF14A /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3CF821C59274A00BCF14A /* menu@2x.png */; };
+		6EA3CF8F1C5930AB00BCF14A /* NowPlayingFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF881C5930AB00BCF14A /* NowPlayingFooter.m */; };
+		6EA3CF901C5930AB00BCF14A /* MyMusicHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF891C5930AB00BCF14A /* MyMusicHeader.m */; };
+		6EA3CF911C5930AB00BCF14A /* MusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF8B1C5930AB00BCF14A /* MusicTableViewCell.m */; };
+		6EA3CF921C5930AB00BCF14A /* MyMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF8D1C5930AB00BCF14A /* MyMusicViewController.m */; };
+		6EA3CF991C59331300BCF14A /* UserManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF951C59331300BCF14A /* UserManagedObject.m */; };
+		6EA3CF9A1C59331300BCF14A /* AudioObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3CF971C59331300BCF14A /* AudioObject.m */; };
 		EBB36FCDADA9B7BDA44C8CFE /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B894DB7CDB2C715B6DC6099 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +79,35 @@
 		6EA3CF5B1C549B5C00BCF14A /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		6EA3CF5F1C564CE400BCF14A /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		6EA3CF601C564CE400BCF14A /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		6EA3CF681C591ED700BCF14A /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		6EA3CF691C591ED700BCF14A /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		6EA3CF6A1C591ED700BCF14A /* CenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterViewController.m; sourceTree = "<group>"; };
+		6EA3CF6B1C591ED700BCF14A /* SlideNavigationMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationMainController.h; sourceTree = "<group>"; };
+		6EA3CF6C1C591ED700BCF14A /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		6EA3CF6D1C591ED700BCF14A /* SlideNavigationMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationMainController.m; sourceTree = "<group>"; };
+		6EA3CF6E1C591ED700BCF14A /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		6EA3CF6F1C591ED700BCF14A /* CenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterViewController.h; sourceTree = "<group>"; };
+		6EA3CF761C591F4800BCF14A /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		6EA3CF771C591F4800BCF14A /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		6EA3CF781C591F4800BCF14A /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
+		6EA3CF791C591F4800BCF14A /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		6EA3CF7A1C591F4800BCF14A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		6EA3CF7B1C591F4800BCF14A /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
+		6EA3CF801C59274A00BCF14A /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		6EA3CF811C59274A00BCF14A /* menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@3x.png"; sourceTree = "<group>"; };
+		6EA3CF821C59274A00BCF14A /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		6EA3CF871C5930AB00BCF14A /* NowPlayingFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingFooter.h; sourceTree = "<group>"; };
+		6EA3CF881C5930AB00BCF14A /* NowPlayingFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingFooter.m; sourceTree = "<group>"; };
+		6EA3CF891C5930AB00BCF14A /* MyMusicHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMusicHeader.m; sourceTree = "<group>"; };
+		6EA3CF8A1C5930AB00BCF14A /* MusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicTableViewCell.h; sourceTree = "<group>"; };
+		6EA3CF8B1C5930AB00BCF14A /* MusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicTableViewCell.m; sourceTree = "<group>"; };
+		6EA3CF8C1C5930AB00BCF14A /* MyMusicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMusicHeader.h; sourceTree = "<group>"; };
+		6EA3CF8D1C5930AB00BCF14A /* MyMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMusicViewController.m; sourceTree = "<group>"; };
+		6EA3CF8E1C5930AB00BCF14A /* MyMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMusicViewController.h; sourceTree = "<group>"; };
+		6EA3CF951C59331300BCF14A /* UserManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManagedObject.m; sourceTree = "<group>"; };
+		6EA3CF961C59331300BCF14A /* AudioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioObject.h; sourceTree = "<group>"; };
+		6EA3CF971C59331300BCF14A /* AudioObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioObject.m; sourceTree = "<group>"; };
+		6EA3CF981C59331300BCF14A /* UserManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManagedObject.h; sourceTree = "<group>"; };
 		98C0E0843D3CF7D421797463 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B3A11F9583C5E94A903798F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,8 +145,8 @@
 		6E7FE4EC1C52447C0023A3A0 /* MiniVKClone */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3CF941C5932FF00BCF14A /* Objects */,
 				6EA3CF541C53706900BCF14A /* Helpers */,
-				6E7FE5251C52B2700023A3A0 /* NewsModel */,
 				6E7FE5081C524B8B0023A3A0 /* API */,
 				6E7FE51C1C529A0A0023A3A0 /* AppDelegate */,
 				6E7FE4FC1C52447C0023A3A0 /* Assets.xcassets */,
@@ -144,6 +190,9 @@
 		6E7FE5191C5299CA0023A3A0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3CF861C59307E00BCF14A /* MyMusicViewController */,
+				6EA3CF751C591F3200BCF14A /* MenuViewController */,
+				6EA3CF741C591EDB00BCF14A /* SlideViewController */,
 				6EA3CF5E1C564C9300BCF14A /* DetailsViewController */,
 				6E7FE51A1C5299DA0023A3A0 /* LoginViewController */,
 				6E7FE5181C5299B20023A3A0 /* NewsViewController */,
@@ -163,6 +212,9 @@
 		6E7FE51B1C5299F50023A3A0 /* resouces */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3CF801C59274A00BCF14A /* menu.png */,
+				6EA3CF811C59274A00BCF14A /* menu@3x.png */,
+				6EA3CF821C59274A00BCF14A /* menu@2x.png */,
 				6E7FE50C1C5250B30023A3A0 /* ic_vk_fitback.png */,
 				6E7FE50D1C5250B30023A3A0 /* ic_vk_fitback@2x.png */,
 				6E7FE50E1C5250B30023A3A0 /* ic_vk_fitback@3x.png */,
@@ -245,6 +297,61 @@
 			name = DetailsViewController;
 			sourceTree = "<group>";
 		};
+		6EA3CF741C591EDB00BCF14A /* SlideViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF6F1C591ED700BCF14A /* CenterViewController.h */,
+				6EA3CF6A1C591ED700BCF14A /* CenterViewController.m */,
+				6EA3CF6C1C591ED700BCF14A /* LeftViewController.h */,
+				6EA3CF6E1C591ED700BCF14A /* LeftViewController.m */,
+				6EA3CF681C591ED700BCF14A /* RightViewController.h */,
+				6EA3CF691C591ED700BCF14A /* RightViewController.m */,
+				6EA3CF6B1C591ED700BCF14A /* SlideNavigationMainController.h */,
+				6EA3CF6D1C591ED700BCF14A /* SlideNavigationMainController.m */,
+			);
+			name = SlideViewController;
+			sourceTree = "<group>";
+		};
+		6EA3CF751C591F3200BCF14A /* MenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF7B1C591F4800BCF14A /* MenuTableViewCell.h */,
+				6EA3CF781C591F4800BCF14A /* MenuTableViewCell.m */,
+				6EA3CF791C591F4800BCF14A /* MenuTableViewCell.xib */,
+				6EA3CF7A1C591F4800BCF14A /* MenuViewController.h */,
+				6EA3CF761C591F4800BCF14A /* MenuViewController.m */,
+				6EA3CF771C591F4800BCF14A /* MenuViewController.xib */,
+			);
+			name = MenuViewController;
+			sourceTree = "<group>";
+		};
+		6EA3CF861C59307E00BCF14A /* MyMusicViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF8A1C5930AB00BCF14A /* MusicTableViewCell.h */,
+				6EA3CF8B1C5930AB00BCF14A /* MusicTableViewCell.m */,
+				6EA3CF8C1C5930AB00BCF14A /* MyMusicHeader.h */,
+				6EA3CF891C5930AB00BCF14A /* MyMusicHeader.m */,
+				6EA3CF8E1C5930AB00BCF14A /* MyMusicViewController.h */,
+				6EA3CF8D1C5930AB00BCF14A /* MyMusicViewController.m */,
+				6EA3CF871C5930AB00BCF14A /* NowPlayingFooter.h */,
+				6EA3CF881C5930AB00BCF14A /* NowPlayingFooter.m */,
+			);
+			name = MyMusicViewController;
+			sourceTree = "<group>";
+		};
+		6EA3CF941C5932FF00BCF14A /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				6EA3CF951C59331300BCF14A /* UserManagedObject.m */,
+				6EA3CF961C59331300BCF14A /* AudioObject.h */,
+				6EA3CF971C59331300BCF14A /* AudioObject.m */,
+				6EA3CF981C59331300BCF14A /* UserManagedObject.h */,
+				6E7FE5251C52B2700023A3A0 /* NewsModel */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		ECCF5BBAEDF3C36E1BAA68BB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,11 +431,16 @@
 			files = (
 				6E7FE5131C5250B30023A3A0 /* ic_vk_fitback@2x.png in Resources */,
 				6E7FE5001C52447C0023A3A0 /* LaunchScreen.storyboard in Resources */,
+				6EA3CF851C59274B00BCF14A /* menu@2x.png in Resources */,
 				6E7FE5161C5250B30023A3A0 /* ic_vk@3x.png in Resources */,
 				6E7FE5151C5250B30023A3A0 /* ic_vk.png in Resources */,
+				6EA3CF7D1C591F4800BCF14A /* MenuViewController.xib in Resources */,
 				6E7FE5141C5250B30023A3A0 /* ic_vk_fitback@3x.png in Resources */,
 				6E7FE5171C5250B30023A3A0 /* ic_vk@2x.png in Resources */,
 				6E7FE5121C5250B30023A3A0 /* ic_vk_fitback.png in Resources */,
+				6EA3CF831C59274A00BCF14A /* menu.png in Resources */,
+				6EA3CF7F1C591F4800BCF14A /* MenuTableViewCell.xib in Resources */,
+				6EA3CF841C59274B00BCF14A /* menu@3x.png in Resources */,
 				6E7FE4FD1C52447C0023A3A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,14 +503,26 @@
 				6E7FE4F51C52447C0023A3A0 /* LoginViewController.m in Sources */,
 				6EA3CF5C1C549B5C00BCF14A /* HeaderView.m in Sources */,
 				6EA3CF611C564CE400BCF14A /* DetailsViewController.m in Sources */,
+				6EA3CF921C5930AB00BCF14A /* MyMusicViewController.m in Sources */,
+				6EA3CF7C1C591F4800BCF14A /* MenuViewController.m in Sources */,
+				6EA3CF8F1C5930AB00BCF14A /* NowPlayingFooter.m in Sources */,
+				6EA3CF901C5930AB00BCF14A /* MyMusicHeader.m in Sources */,
 				6E7FE4F21C52447C0023A3A0 /* AppDelegate.m in Sources */,
 				6E7FE4EF1C52447C0023A3A0 /* main.m in Sources */,
+				6EA3CF701C591ED700BCF14A /* RightViewController.m in Sources */,
+				6EA3CF9A1C59331300BCF14A /* AudioObject.m in Sources */,
+				6EA3CF731C591ED700BCF14A /* LeftViewController.m in Sources */,
 				6E7FE5201C529AB80023A3A0 /* NewsViewController.m in Sources */,
+				6EA3CF911C5930AB00BCF14A /* MusicTableViewCell.m in Sources */,
 				6EA3CF581C53707E00BCF14A /* WebImageView.m in Sources */,
+				6EA3CF721C591ED700BCF14A /* SlideNavigationMainController.m in Sources */,
+				6EA3CF711C591ED700BCF14A /* CenterViewController.m in Sources */,
 				6E7FE5281C52B2A60023A3A0 /* NewsModel.m in Sources */,
+				6EA3CF991C59331300BCF14A /* UserManagedObject.m in Sources */,
 				6E7FE4FB1C52447C0023A3A0 /* MiniVKClone.xcdatamodeld in Sources */,
 				6E7FE50B1C524B9F0023A3A0 /* API.m in Sources */,
 				6E7FE5241C52AA6B0023A3A0 /* NewsTableViewCell.m in Sources */,
+				6EA3CF7E1C591F4800BCF14A /* MenuTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

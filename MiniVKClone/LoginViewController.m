@@ -35,12 +35,17 @@ int i = 0;
     [[VKSdk instance] setUiDelegate:self];
     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
         if (state == VKAuthorizationAuthorized) {
-            [self startWorking];
+//            [self startWorking];
         } else if (error) {
             [[[UIAlertView alloc] initWithTitle:nil message:[error description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         }
     }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 
 #pragma mark - SetupUI
 
@@ -102,6 +107,8 @@ int i = 0;
         [userDefaults setObject:result.token.accessToken forKey:@"accessToken"];
         [userDefaults setObject:result.user.id forKey:@"user_id"];
         [userDefaults synchronize];
+        UserObject *user = [[UserObject alloc] init];
+        [user updateWithUser:result.user];
         [self startWorking];
     } else if (result.error) {
         [[[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Access denied\n%@", result.error] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
@@ -126,10 +133,16 @@ int i = 0;
 
 -(void)startWorking {
     self->_callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{@"user_id":@45898586,@"count":@100}];
-    NewsViewController *vc = [[NewsViewController alloc] init];
-    vc.callingRequest = self->_callingRequest;
-    [self.navigationController pushViewController:vc animated:YES];
-    self->_callingRequest = nil;
+    UINavigationController* nc = [[UINavigationController alloc] init];
+    SlideNavigationMainController *snc = [[SlideNavigationMainController alloc]init];
+    [snc setCenteralView:nc];
+    MenuViewController* mvc;
+    mvc = [[MenuViewController alloc]init];
+    
+    mvc.mainViewController = snc;
+    
+    [snc setLeftView:mvc];
+    [self.navigationController pushViewController:snc animated:YES];
 }
 
 -(void)vkAuth

@@ -12,7 +12,7 @@
 #import "VKSdk.h"
 #import "NewsModel.h"
 #import "WebImageView.h"
-
+#import "UserManagedObject.h"
 
 #define screenWidth [UIScreen mainScreen].bounds.size.width
 #define screenHeight [UIScreen mainScreen].bounds.size.height

@@ -16,7 +16,9 @@
 @property(strong, nonatomic) NSString *string;
 @property(strong, nonatomic) VKResponse *resp;
 @property(strong, nonatomic) NewsModel *model;
-@property (nonatomic, strong) UIActivityIndicatorView *ai;
+@property(strong, nonatomic) UIActivityIndicatorView *ai;
+@property(strong, nonatomic) UIButton *leftButton;
+@property(strong, nonatomic) UINavigationBar *navBar;
 @property (nonatomic) BOOL loadMoreNews;
 @property (nonatomic) BOOL loadOldNews;
 
@@ -28,17 +30,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = self.logout;
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.view addSubview:self.navBar];
+    [self.navigationController.view addSubview:self.leftButton];
     self.title = @"NEWS";
-    
+    [self.view removeGestureRecognizer:self.tap];
     [self.view addSubview:self.ai];
     [self.view addSubview:self.newsTableView];
     _newsArray = [NSMutableArray new];
     
     [self loadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+//    [self.navigationController setNavigationBarHidden:YES];
 }
 
 #pragma mark - loadData
@@ -73,8 +77,27 @@
 }
 
 
+#pragma mark - setupNavBar
+- (UINavigationBar *)navBar {
+    if (!_navBar) {
+        _navBar = [[UINavigationBar alloc] init];
+        [_navBar setBackgroundColor:[UIColor clearColor]];
+        [_navBar setAlpha:0.0];
+    }
+    return _navBar;
+}
 
 #pragma mark - SetupUI
+
+
+-(UIButton *)leftButton {
+    if(!_leftButton) {
+        _leftButton = [[UIButton alloc] init];
+        [_leftButton setImage:[[UIImage imageNamed:@"menu"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_leftButton addTarget:self action:@selector(menuButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _leftButton;
+}
 
 - (UIActivityIndicatorView *)ai {
     if (!_ai) {
@@ -113,8 +136,6 @@
     }
     return _refreshControl;
 }
-
-
 
 #pragma mark - UITableView delegate
 
@@ -170,11 +191,14 @@
 
 #pragma mark - Actions
 
+- (void)menuButtonClick {
+    [self.delegate showLeftPanel];
+}
+
 -(void)logoutClick {
     [VKSdk forceLogout];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
 
 #pragma mark - REFRESH
 
@@ -198,8 +222,9 @@
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    [_newsTableView setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    [_navBar setFrame:CGRectMake(0, 0, screenWidth, navigationBarHeight)];
+    [_leftButton setFrame:CGRectMake(0, statusBarOffset, 44, 44)];
+    [_newsTableView setFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight)];
 }
 
 - (void)didReceiveMemoryWarning {

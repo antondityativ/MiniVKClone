@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
+#import "SlideNavigationMainController.h"
 
 
-@interface NewsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NewsViewController : CenterViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) UILabel *methodName;
 
