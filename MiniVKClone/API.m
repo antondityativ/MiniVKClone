@@ -17,12 +17,17 @@ API *sharedAPI = nil;
 + (API *)sharedAPI {
     if (sharedAPI == nil) {
         sharedAPI = [[API alloc] init];
+        [[NetworkMonitoring sharedMonitoring] startMonitoring];
     }
     return sharedAPI;
 }
 
 - (NSString *)getUrlAPI {
     return [NSString stringWithFormat:@"%@", baseUrlAPI];
+}
+
+-(NSString *)getPingUrl {
+    return [NSString stringWithFormat:@"www.apple.com"];
 }
 
 

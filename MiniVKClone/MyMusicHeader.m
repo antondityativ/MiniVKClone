@@ -44,7 +44,7 @@
         [_avatar setContentMode:UIViewContentModeScaleAspectFill];
         [_avatar setClipsToBounds:YES];
         [_avatar.layer setCornerRadius:_avatar.frame.size.width/2];
-//        [_avatar setImageWithURL:[MainStorage sharedMainStorage].currentUser.avatarMediumUrl];
+        [_avatar setImageWithURL:[MainStorage sharedMainStorage].currentUser.avatarMediumUrl];
     }
     return _avatar;
 }
@@ -54,7 +54,7 @@
         _name = [[UILabel alloc] init];
         [_name setFont:[UIFont systemFontOfSize:18]];
         [_name setTextColor:[UIColor whiteColor]];
-//        [_name setText:[MainStorage sharedMainStorage].currentUser.fullName];
+        [_name setText:[MainStorage sharedMainStorage].currentUser.fullName];
         [_name setTextAlignment:NSTextAlignmentLeft];
         [_name sizeToFit];
         [_name setFrame:CGRectMake(CGRectGetMaxX(_avatar.frame) + 10, 8, screenWidth - (CGRectGetMaxX(_avatar.frame) + 5) - 45, _name.frame.size.height)];

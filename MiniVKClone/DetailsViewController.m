@@ -34,7 +34,9 @@
     [self.scrollView addSubview:self.avatarImageView];
     [self.scrollView addSubview:self.nameLabel];
     [self.scrollView addSubview:self.postDescriptionLabel];
-    [self.scrollView addSubview:self.postImageView];
+    if(_model.image) {
+        [self.scrollView addSubview:self.postImageView];
+    }
 }
 
 -(UIScrollView *)scrollView {
@@ -101,7 +103,7 @@
     [_nameLabel sizeToFit];
     [_nameLabel setFrame:CGRectMake(CGRectGetMaxX(_avatarImageView.frame) + 10, _avatarImageView.frame.origin.y + _avatarImageView.frame.size.height/2 -10, screenWidth - CGRectGetMaxX(_avatarImageView.frame) - 30, _nameLabel.frame.size.height)];
     [_postDescriptionLabel sizeToFit];
-    [_postDescriptionLabel setFrame:CGRectMake(20, CGRectGetMaxY(_avatarImageView.frame) + 20, screenWidth - 20, _postDescriptionLabel.frame.size.height)];
+    [_postDescriptionLabel setFrame:CGRectMake(20, CGRectGetMaxY(_avatarImageView.frame) + 20, screenWidth - 40, _postDescriptionLabel.frame.size.height)];
     [_postImageView setFrame:CGRectMake(20, CGRectGetMaxY(_postDescriptionLabel.frame), screenWidth - 40, 180)];
     [_scrollView setContentSize:CGSizeMake(screenWidth,CGRectGetMaxY(_postImageView.frame)+ 90)];
 }

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HeaderView.h"
 #import "WebImageView.h"
 
 @interface NewsTableViewCell : UITableViewCell

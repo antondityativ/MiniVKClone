@@ -7,6 +7,7 @@
 //
 
 #import "NewsViewController.h"
+#import <CoreData/CoreData.h>
 
 @interface NewsViewController ()
 
@@ -17,8 +18,6 @@
 @property(strong, nonatomic) VKResponse *resp;
 @property(strong, nonatomic) NewsModel *model;
 @property(strong, nonatomic) UIActivityIndicatorView *ai;
-@property(strong, nonatomic) UIButton *leftButton;
-@property(strong, nonatomic) UINavigationBar *navBar;
 @property (nonatomic) BOOL loadMoreNews;
 @property (nonatomic) BOOL loadOldNews;
 
@@ -30,74 +29,60 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.view addSubview:self.navBar];
-    [self.navigationController.view addSubview:self.leftButton];
     self.title = @"NEWS";
-    [self.view removeGestureRecognizer:self.tap];
     [self.view addSubview:self.ai];
     [self.view addSubview:self.newsTableView];
+    self.navigationItem.leftBarButtonItem = self.logout;
+    self.navigationController.navigationBar.translucent = NO;
     _newsArray = [NSMutableArray new];
     
     [self loadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:YES];
-}
-
 #pragma mark - loadData
 
 - (void)loadData {
-    NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
-    __weak __typeof(self) welf = self;
-        self.callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{@"user_id":[session valueForKey:@"user_id"],@"count":@50,@"start_from":[NSNumber numberWithInteger:_newsArray.count],@"filters":@"post"}];
-    [self.callingRequest executeWithResultBlock:^(VKResponse *response)
-    {
-        if ([response.json isKindOfClass:[NSDictionary class]]) {
-            NSArray *items = [response.json valueForKey:@"items"];
-            if (items.count > 0) {
-                for(NSDictionary *dict in items) {
-                    _model = [NewsModel new];
-                    [_model updateWithDictionary:dict];
-                    [_newsArray addObject:_model];
-                }
-                        _loadMoreNews = NO;
-            }else {
-                        _loadMoreNews = YES;
-            }
-            [_ai stopAnimating];
-            [self.refreshControl endRefreshing];
-            [_newsTableView reloadData];
-        }
+    if([[NetworkMonitoring sharedMonitoring] checkConnection]) {
+        [[MainStorage sharedMainStorage] deleteNews];
+        VKRequest *callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{VK_API_ACCESS_TOKEN:[[MainStorage sharedMainStorage] returnAccessToken],@"user_id":[MainStorage sharedMainStorage].currentUser.userId,@"count":@50,@"start_from":[NSNumber numberWithInteger:_newsArray.count],@"filters":@"post"}];
+        [callingRequest executeWithResultBlock:^(VKResponse *response)
+         {
 
-        welf.callingRequest = nil;
-    }                                errorBlock:^(NSError *error) {
-        welf.callingRequest = nil;
-    }];
-}
-
-
-#pragma mark - setupNavBar
-- (UINavigationBar *)navBar {
-    if (!_navBar) {
-        _navBar = [[UINavigationBar alloc] init];
-        [_navBar setBackgroundColor:[UIColor clearColor]];
-        [_navBar setAlpha:0.0];
+             if ([response.json isKindOfClass:[NSDictionary class]]) {
+                 NSArray *items = [response.json valueForKey:@"items"];
+                 if (items.count > 0) {
+                     for(NSDictionary *dict in items) {
+                         _model = [NewsModel new];
+                         [_model updateWithDictionary:dict];
+                         [_newsArray addObject:_model];
+                     }
+                     _loadMoreNews = NO;
+                 }else {
+                     _loadMoreNews = YES;
+                 }
+                 [_ai stopAnimating];
+                 [self.refreshControl endRefreshing];
+                 for(NewsModel *model in _newsArray) {
+                     [[MainStorage sharedMainStorage] createNews:model];
+                 }
+                 [_newsTableView reloadData];
+             }
+             else {
+                 _newsArray = [[MainStorage sharedMainStorage] returnNews].copy;
+                 [self.newsTableView reloadData];
+             }
+             
+         }errorBlock:^(NSError *error) {
+             NSLog(@"%@", error);
+         }];
     }
-    return _navBar;
+    else {
+        _newsArray = [[MainStorage sharedMainStorage] returnNews].copy;
+        [self.newsTableView reloadData];
+    }
 }
 
 #pragma mark - SetupUI
-
-
--(UIButton *)leftButton {
-    if(!_leftButton) {
-        _leftButton = [[UIButton alloc] init];
-        [_leftButton setImage:[[UIImage imageNamed:@"menu"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-        [_leftButton addTarget:self action:@selector(menuButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _leftButton;
-}
 
 - (UIActivityIndicatorView *)ai {
     if (!_ai) {
@@ -160,7 +145,8 @@
     if (cell == nil) {
         cell = [[NewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                     reuseIdentifier:CellIdentifier];
-    }    
+    }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setupCellFromNews:[_newsArray objectAtIndex:indexPath.row]];
     
     return cell;
@@ -169,6 +155,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return CGFLOAT_MIN;
+}
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsTableViewCell *cell = (NewsTableViewCell*)[self.newsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+    
+    cell.alpha = 0.5f;
+}
+-(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsTableViewCell *cell = (NewsTableViewCell*)[self.newsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+    
+    cell.alpha = 1.0f;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -191,13 +188,15 @@
 
 #pragma mark - Actions
 
-- (void)menuButtonClick {
-    [self.delegate showLeftPanel];
-}
 
 -(void)logoutClick {
     [VKSdk forceLogout];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
+    [session setValue:nil forKey:@"accessToken"];
+    [session synchronize];
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - REFRESH
@@ -222,9 +221,7 @@
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [_navBar setFrame:CGRectMake(0, 0, screenWidth, navigationBarHeight)];
-    [_leftButton setFrame:CGRectMake(0, statusBarOffset, 44, 44)];
-    [_newsTableView setFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight)];
+    [_newsTableView setFrame:CGRectMake(0, 0, screenWidth, screenHeight - navigationBarHeight - tabBarHeight)];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
-#import "SlideNavigationMainController.h"
 
-
-@interface NewsViewController : CenterViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NewsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) UILabel *methodName;
 
 @property(nonatomic, strong) VKRequest *callingRequest;
+
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *coordinator;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

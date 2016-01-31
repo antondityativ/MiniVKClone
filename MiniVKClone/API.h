@@ -14,6 +14,7 @@
 
 + (API *)sharedAPI;
 
+-(NSString *)getPingUrl;
 
 typedef void (^socialRegisterCompletion)(NSArray *responseRegister, NSError *error);
 

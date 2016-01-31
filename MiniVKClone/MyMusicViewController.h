@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "SlideNavigationMainController.h"
 
-@interface MyMusicViewController : CenterViewController <UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate>
+@interface MyMusicViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate>
 
 @end

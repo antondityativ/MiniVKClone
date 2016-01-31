@@ -7,7 +7,6 @@
 //
 
 #import "MyMusicViewController.h"
-//#import "SearchViewController.h"
 
 #import "MyMusicHeader.h"
 #import "MusicTableViewCell.h"
@@ -15,7 +14,7 @@
 
 #import "AudioObject.h"
 
-//#import "PlayerViewController.h"
+#import "PlayerViewController.h"
 
 @interface MyMusicViewController ()
 
@@ -26,6 +25,7 @@
 @property (nonatomic, strong) UIActivityIndicatorView *ai;
 
 @property (nonatomic, strong) NSMutableArray *musicArray;
+@property(strong, nonatomic) UIBarButtonItem *logout;
 
 @property (nonatomic) BOOL loadMoreAudio;
 
@@ -35,10 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.view setBackgroundColor:[UIColor blackColor]];
     
+    self.navigationItem.leftBarButtonItem = self.logout;
+    self.title  = @"My Music";
     [self.view addSubview:self.ai];
     [self.view addSubview:self.tableView];
     
@@ -48,9 +48,8 @@
 
 #pragma mark loadData
 - (void)loadData {
-    NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dict = @{VK_API_ACCESS_TOKEN : [session valueForKey:@"accessToken"], VK_API_OWNER_ID : [session valueForKey:@"user_id"], @"count" : [NSNumber numberWithInt:100], @"offset" : [NSNumber numberWithInteger:_musicArray.count]};
-    VKRequest *audioRequest = [VKRequest requestWithMethod:@"audio.get" andParameters:dict];
+    NSDictionary *dict = @{VK_API_ACCESS_TOKEN : [[MainStorage sharedMainStorage] returnAccessToken], VK_API_OWNER_ID : [MainStorage sharedMainStorage].currentUser.userId, @"count" : [NSNumber numberWithInt:100], @"offset" : [NSNumber numberWithInteger:_musicArray.count]};
+    VKRequest *audioRequest = [VKRequest requestWithMethod:@"audio.get" parameters:dict];
     [audioRequest executeWithResultBlock:^(VKResponse *response) {
         if ([response.json isKindOfClass:[NSDictionary class]]) {
             NSNumber *number = [response.json valueForKey:@"count"];
@@ -72,7 +71,7 @@
             
         }
     } errorBlock:^(NSError *error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 
@@ -86,9 +85,16 @@
     return _ai;
 }
 
+-(UIBarButtonItem *)logout {
+    if(!_logout) {
+        _logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleDone target:self action:@selector(logoutClick)];
+    }
+    return _logout;
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarOffset, screenWidth, screenHeight - statusBarOffset) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarOffset+navigationBarHeight, screenWidth, screenHeight - statusBarOffset - navigationBarHeight - tabBarHeight) style:UITableViewStylePlain];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setBackgroundColor:[UIColor clearColor]];
@@ -135,9 +141,9 @@
     return CGFLOAT_MIN;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    return self.footer;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return self.footer;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 63.5;
@@ -155,12 +161,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    PlayerViewController *player = [[PlayerViewController alloc] init];
-//    player.currentMusicIndex = indexPath.row;
-//    player.musicArray = _musicArray;
-//    [self.navigationController presentViewController:player animated:YES completion:^{
+    PlayerViewController *player = [[PlayerViewController alloc] init];
+    player.currentMusicIndex = indexPath.row;
+    player.musicArray = _musicArray;
+    [self.navigationController presentViewController:player animated:YES completion:^{
     
-//    }];
+    }];
 }
 
 #pragma mark ScrollView Delegate
@@ -177,9 +183,17 @@
 
 #pragma mark Actions
 - (void)searchButtonAction {
-//    SearchViewController *searchVC = [[SearchViewController alloc] init];
-//    [self.navigationController pushViewController:searchVC animated:YES];
+
 }
+
+-(void)logoutClick {
+    [VKSdk forceLogout];
+    NSUserDefaults *session = [NSUserDefaults standardUserDefaults];
+    [session setValue:nil forKey:@"accessToken"];
+    [session synchronize];
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
