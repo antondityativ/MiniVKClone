@@ -9,10 +9,21 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#import "VKSdk.h"
+#import "NewsModel.h"
+#import "WebImageView.h"
+#import "UserManagedObject.h"
+#import "SoundManager.h"
+#import "MainStorage.h"
+#import "NetworkMonitoring.h"
+#import "LoginViewController.h"
 
 #define screenWidth [UIScreen mainScreen].bounds.size.width
 #define screenHeight [UIScreen mainScreen].bounds.size.height
 #define statusBarOffset 20
 #define navigationBarHeight 64
+#define tabBarHeight 44
+
+#define VKid @"5237517"
 
 #endif /* PrefixHeader_pch */
