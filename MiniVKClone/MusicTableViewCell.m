@@ -69,6 +69,14 @@
     // Configure the view for the selected state
 }
 
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    [_title sizeToFit];
+    [_title setFrame:CGRectMake(10, 10, screenWidth - 20, _title.frame.size.height)];
+    [_artist sizeToFit];
+    [_artist setFrame:CGRectMake(10, CGRectGetMaxY(_title.frame) + 5, screenWidth - 20, _artist.frame.size.height)];
+}
+
 #pragma mark Helpers
 + (CGFloat)cellHeightForMusicCell:(AudioObject *)audio {
     MusicTableViewCell *cell = [[MusicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];

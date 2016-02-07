@@ -22,7 +22,6 @@
 
 @property (nonatomic, strong) WebImageView *imgToLoad;
 @property (nonatomic, strong) UIImageView *blurCover;
-@property (nonatomic, strong) WebImageView *cover;
 
 @property (nonatomic, strong) ControllView *controlPanel;
 @property (nonatomic, strong) SLColorArt *colorArt;
@@ -38,7 +37,7 @@
     
     [self.view addSubview:self.imgToLoad];
     [self.view addSubview:self.blurCover];
-    [self.view addSubview:self.cover];
+//    [self.view addSubview:self.cover];
     [self.view addSubview:self.closeButton];
     [self.view addSubview:self.artistLabel];
     [self.view addSubview:self.titleLabel];
@@ -108,15 +107,15 @@
     return _blurCover;
 }
 
-- (WebImageView *)cover {
-    if (!_cover) {
-        _cover = [[WebImageView alloc] initWithFrame:CGRectMake(20, screenHeight/2 - (screenWidth/2 - 10), screenWidth - 40, screenWidth - 40)];
-        [_cover setContentMode:UIViewContentModeScaleToFill];
-        [_cover setClipsToBounds:YES];
-        [_cover.layer setCornerRadius:_cover.frame.size.width/2];
-    }
-    return _cover;
-}
+//- (WebImageView *)cover {
+//    if (!_cover) {
+//        _cover = [[WebImageView alloc] init];
+//        [_cover setContentMode:UIViewContentModeScaleToFill];
+//        [_cover setClipsToBounds:YES];
+//        [_cover.layer setCornerRadius:_cover.frame.size.width/2];
+//    }
+//    return _cover;
+//}
 
 
 - (UILabel *)artistLabel {
@@ -141,7 +140,7 @@
 
 - (ControllView *)controlPanel {
     if (!_controlPanel) {
-        _controlPanel = [[ControllView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_cover.frame) + 10, screenWidth, 40)];
+        _controlPanel = [[ControllView alloc] init];
         _controlPanel.isPlaying = YES;
         [_controlPanel setDelegate:self];
     }
@@ -165,13 +164,13 @@
     [_controlPanel.shuffleButton setTintColor:[_colorArt.secondaryColor colorWithAlphaComponent:[SoundManager sharedManager].shuffle ? 1.0 : 0.5]];
     
     [UIView transitionWithView:self.view duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        [_cover.activityIndicator stopAnimating];
+//        [_cover.activityIndicator stopAnimating];
         [_artistLabel setTextColor:_colorArt.primaryColor];
         [_titleLabel setTextColor:_colorArt.secondaryColor];
         [_closeButton setTitleColor:_colorArt.detailColor forState:UIControlStateNormal];
         [_closeButton setTitleColor:[_colorArt.detailColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [_closeButton setTitleColor:[_colorArt.detailColor colorWithAlphaComponent:0.5] forState:UIControlStateSelected];
-        [_cover setImage:image];
+//        [_cover setImage:image];
         [_blurCover setImage:bluredImage];
     } completion:nil];
 }
@@ -199,30 +198,37 @@
 
 - (void)shuffle {
     [SoundManager sharedManager].shuffle = ![SoundManager sharedManager].shuffle;
-//    [_controlPanel.shuffleButton setTintColor:[_colorArt.secondaryColor colorWithAlphaComponent:[PRSoundManager sharedManager].shuffle ? 1.0 : 0.5]];
 }
 
 #pragma mark SoundManagerDelegate
 - (void)newAudio:(AudioObject *)audio {
     [_artistLabel setText:audio.artist];
-    [_artistLabel sizeToFit];
-    [_artistLabel setFrame:CGRectMake(10, CGRectGetMinY(_cover.frame) - 10 - _artistLabel.frame.size.height, screenWidth - 20, _artistLabel.frame.size.height)];
     
     [_titleLabel setText:audio.title];
-    [_titleLabel sizeToFit];
-    [_titleLabel setFrame:CGRectMake(10, CGRectGetMinY(_artistLabel.frame) - 10 - _titleLabel.frame.size.height, screenWidth - 20, _titleLabel.frame.size.height)];
 }
 
 - (void)coverWasFound:(NSString *)url {
     [UIView transitionWithView:self.view duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         [_blurCover setImage:nil];
-        [_cover setImage:nil];
+//        [_cover setImage:nil];
     } completion:nil];
-    [_cover.activityIndicator startAnimating];
+//    [_cover.activityIndicator startAnimating];
     [_imgToLoad setImageWithURL:url];
 }
 
 #pragma mark Others
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    [_controlPanel setFrame:CGRectMake(0, screenHeight - 80, screenWidth, 40)];
+    
+    [_artistLabel sizeToFit];
+    [_artistLabel setFrame:CGRectMake(10, screenHeight/2 - screenHeight/4, screenWidth - 20, _artistLabel.frame.size.height)];
+    
+    [_titleLabel sizeToFit];
+    [_titleLabel setFrame:CGRectMake(10, CGRectGetMinY(_artistLabel.frame) - 10 - _titleLabel.frame.size.height, screenWidth - 20, _titleLabel.frame.size.height)];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

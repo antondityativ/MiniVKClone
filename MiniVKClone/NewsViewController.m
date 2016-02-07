@@ -36,19 +36,20 @@
     self.navigationController.navigationBar.translucent = NO;
     _newsArray = [NSMutableArray new];
     
-    [self loadData];
+    [self loadDataWithStartFrom:[NSNumber numberWithInteger:_newsArray.count]];
 }
 
 #pragma mark - loadData
 
-- (void)loadData {
+- (void)loadDataWithStartFrom:(NSNumber *)startFrom {
     if([[NetworkMonitoring sharedMonitoring] checkConnection]) {
         [[MainStorage sharedMainStorage] deleteNews];
-        VKRequest *callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{VK_API_ACCESS_TOKEN:[[MainStorage sharedMainStorage] returnAccessToken],@"user_id":[MainStorage sharedMainStorage].currentUser.userId,@"count":@50,@"start_from":[NSNumber numberWithInteger:_newsArray.count],@"filters":@"post"}];
+        VKRequest *callingRequest = [VKRequest requestWithMethod:@"newsfeed.get" parameters:@{VK_API_ACCESS_TOKEN:[[MainStorage sharedMainStorage] returnAccessToken],@"user_id":[MainStorage sharedMainStorage].currentUser.userId,@"count":@50,@"start_from":startFrom,@"filters":@"post"}];
         [callingRequest executeWithResultBlock:^(VKResponse *response)
          {
 
              if ([response.json isKindOfClass:[NSDictionary class]]) {
+                 _newsArray = [NSMutableArray array];
                  NSArray *items = [response.json valueForKey:@"items"];
                  if (items.count > 0) {
                      for(NSDictionary *dict in items) {
@@ -179,9 +180,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!_loadMoreNews && scrollView.contentOffset.y > scrollView.contentSize.height - _newsTableView.bounds.size.height) {
         _loadMoreNews = YES;
-        if (_newsArray.count >= 50) {
+        if (_newsArray.count >= 48) {
             [_ai startAnimating];
-            [self loadData];
+            [self loadDataWithStartFrom:[NSNumber numberWithInteger:_newsArray.count]];
         }
     }
 }
@@ -202,8 +203,8 @@
 #pragma mark - REFRESH
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    _newsArray = [NSMutableArray new];
-    [self loadData];
+    NSArray *array = [NSMutableArray new];
+    [self loadDataWithStartFrom:[NSNumber numberWithInteger:array.count]];
     
     if (refreshControl) {
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2DC4E41C6786C3002A533E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2DC4E31C6786C3002A533E /* SearchViewController.m */; };
 		6E7FE4EF1C52447C0023A3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE4EE1C52447C0023A3A0 /* main.m */; };
 		6E7FE4F21C52447C0023A3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE4F11C52447C0023A3A0 /* AppDelegate.m */; };
 		6E7FE4F51C52447C0023A3A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FE4F41C52447C0023A3A0 /* LoginViewController.m */; };
@@ -77,6 +78,8 @@
 
 /* Begin PBXFileReference section */
 		1B894DB7CDB2C715B6DC6099 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E2DC4E21C6786C3002A533E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		6E2DC4E31C6786C3002A533E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		6E7FE4EA1C52447C0023A3A0 /* MiniVKClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniVKClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7FE4EE1C52447C0023A3A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6E7FE4F01C52447C0023A3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -184,6 +187,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E2DC4E11C6786A5002A533E /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6E2DC4E21C6786C3002A533E /* SearchViewController.h */,
+				6E2DC4E31C6786C3002A533E /* SearchViewController.m */,
+			);
+			name = SearchViewController;
+			sourceTree = "<group>";
+		};
 		6E7FE4E11C52447C0023A3A0 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +263,7 @@
 		6E7FE5191C5299CA0023A3A0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6E2DC4E11C6786A5002A533E /* SearchViewController */,
 				6E83DA451C5C83E900084244 /* PlayerViewController */,
 				6EA3CF861C59307E00BCF14A /* MyMusicViewController */,
 				6EA3CF5E1C564C9300BCF14A /* DetailsViewController */,
@@ -656,6 +669,7 @@
 				6E83DA491C5C841300084244 /* ControllView.m in Sources */,
 				6E83DA4F1C5C85A400084244 /* SoundManager.m in Sources */,
 				6EA3CF9A1C59331300BCF14A /* AudioObject.m in Sources */,
+				6E2DC4E41C6786C3002A533E /* SearchViewController.m in Sources */,
 				6E83DA561C5C8C4100084244 /* UIImage+ColorArt.m in Sources */,
 				6E83DA9E1C5E0FB100084244 /* NetworkMonitoring.m in Sources */,
 				6E7FE5201C529AB80023A3A0 /* NewsViewController.m in Sources */,
