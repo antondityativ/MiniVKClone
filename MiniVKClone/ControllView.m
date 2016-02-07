@@ -38,7 +38,7 @@
     if (!_playButton) {
         UIImage *image = [[UIImage imageNamed:@"play"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        _playButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth/2 + 5, 0, 40, 40)];
+        _playButton = [[UIButton alloc] init];
         [_playButton setImage:image forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(playButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -49,7 +49,7 @@
     if (!_pauseButton) {
         UIImage *image = [[UIImage imageNamed:@"pause"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        _pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth/2 + 5, 0, 40, 40)];
+        _pauseButton = [[UIButton alloc] init];
         [_pauseButton setImage:image forState:UIControlStateNormal];
         [_pauseButton addTarget:self action:@selector(pauseButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -60,7 +60,7 @@
     if (!_shuffleButton) {
         UIImage *image = [[UIImage imageNamed:@"shuffle"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        _shuffleButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth/2 - 5 - 40, 0, 40, 40)];
+        _shuffleButton = [[UIButton alloc] init];
         [_shuffleButton setImage:image forState:UIControlStateNormal];
         [_shuffleButton addTarget:self action:@selector(shuffleButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -71,7 +71,7 @@
     if (!_nextButton) {
         UIImage *image = [[UIImage imageNamed:@"next"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        _nextButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_playButton.frame) + 10, 0, 40, 40)];
+        _nextButton = [[UIButton alloc] init];
         [_nextButton setImage:image forState:UIControlStateNormal];
         [_nextButton addTarget:self action:@selector(nextButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -82,7 +82,7 @@
     if (!_previousButton) {
         UIImage *image = [[UIImage imageNamed:@"previous"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        _previousButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_shuffleButton.frame) - 10 - 40, 0, 40, 40)];
+        _previousButton = [[UIButton alloc] init];
         [_previousButton setImage:image forState:UIControlStateNormal];
         [_previousButton addTarget:self action:@selector(previousButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -108,6 +108,16 @@
 
 - (void)shuffleButtonAction {
     [self.delegate shuffle];
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    [_playButton setFrame:CGRectMake(screenWidth/2 + 5, 0, 40, 40)];
+    [_pauseButton setFrame:CGRectMake(screenWidth/2 + 5, 0, 40, 40)];
+    [_shuffleButton setFrame:CGRectMake(screenWidth/2 - 5 - 40, 0, 40, 40)];
+    [_nextButton setFrame:CGRectMake(CGRectGetMaxX(_playButton.frame) + 10, 0, 40, 40)];
+    [_previousButton setFrame:CGRectMake(CGRectGetMinX(_shuffleButton.frame) - 10 - 40, 0, 40, 40)];
+    
 }
 
 #pragma mark Notification

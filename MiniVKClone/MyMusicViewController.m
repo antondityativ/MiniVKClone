@@ -79,7 +79,6 @@
 - (UIActivityIndicatorView *)ai {
     if (!_ai) {
         _ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [_ai setCenter:CGPointMake(screenWidth/2, screenHeight/2)];
         [_ai startAnimating];
     }
     return _ai;
@@ -94,20 +93,19 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarOffset+navigationBarHeight, screenWidth, screenHeight - statusBarOffset - navigationBarHeight - tabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] init];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setBackgroundColor:[UIColor clearColor]];
         [_tableView registerClass:[MusicTableViewCell class] forCellReuseIdentifier:@"cell"];
         [_tableView setSeparatorColor:[UIColor colorWithWhite:1.0 alpha:0.7]];
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, screenWidth, 0, screenWidth)];
     }
     return _tableView;
 }
 
 - (MyMusicHeader *)header {
     if (!_header) {
-        _header = [[MyMusicHeader alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 60)];
+        _header = [[MyMusicHeader alloc] init];
         [_header.searchButton addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _header;
@@ -169,6 +167,25 @@
     }];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
 #pragma mark ScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!_loadMoreAudio && scrollView.contentOffset.y > scrollView.contentSize.height - _tableView.bounds.size.height) {
@@ -183,7 +200,8 @@
 
 #pragma mark Actions
 - (void)searchButtonAction {
-
+    SearchViewController *vc = [SearchViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)logoutClick {
@@ -193,11 +211,28 @@
     [session synchronize];
     LoginViewController *vc = [[LoginViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];}
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    // Force your tableview margins (this may be a bad idea)
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    [_ai setCenter:CGPointMake(screenWidth/2, screenHeight/2)];
+    [_tableView setFrame:CGRectMake(0, statusBarOffset+navigationBarHeight, screenWidth, screenHeight - statusBarOffset - navigationBarHeight - tabBarHeight)];
+    [_header setFrame:CGRectMake(0, 0, screenWidth, 60)];
 }
 
 @end

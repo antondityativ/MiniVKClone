@@ -39,7 +39,7 @@
 
 - (WebImageView *)avatar {
     if (!_avatar) {
-        _avatar = [[WebImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
+        _avatar = [[WebImageView alloc] init];
         [_avatar setUserInteractionEnabled:YES];
         [_avatar setContentMode:UIViewContentModeScaleAspectFill];
         [_avatar setClipsToBounds:YES];
@@ -57,7 +57,6 @@
         [_name setText:[MainStorage sharedMainStorage].currentUser.fullName];
         [_name setTextAlignment:NSTextAlignmentLeft];
         [_name sizeToFit];
-        [_name setFrame:CGRectMake(CGRectGetMaxX(_avatar.frame) + 10, 8, screenWidth - (CGRectGetMaxX(_avatar.frame) + 5) - 45, _name.frame.size.height)];
     }
     return _name;
 }
@@ -74,7 +73,7 @@
 
 - (UIView *)separator {
     if (!_separator) {
-        _separator = [[UIView alloc] initWithFrame:CGRectMake(0, 59.5, screenWidth, 0.5)];
+        _separator = [[UIView alloc] init];
         [_separator setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.7]];
     }
     return _separator;
@@ -82,7 +81,7 @@
 
 - (UIButton *)searchButton {
     if (!_searchButton) {
-        _searchButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 40, 10, 40, 40)];
+        _searchButton = [[UIButton alloc] init];
         [_searchButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     }
     return _searchButton;
@@ -92,7 +91,6 @@
 - (void)setSoundNumber:(NSNumber *)count {
     [_numberOfSounds setText:[NSString stringWithFormat:@"%@ %@", count, [self countString:count]]];
     [_numberOfSounds sizeToFit];
-    [_numberOfSounds setFrame:CGRectMake(CGRectGetMaxX(_avatar.frame) + 10, CGRectGetMaxY(_name.frame) + 5, _numberOfSounds.frame.size.width, _numberOfSounds.frame.size.height)];
     [UIView animateWithDuration:0.25 animations:^{
         [_numberOfSounds setAlpha:1.0];
     }];
@@ -109,6 +107,17 @@
         balls=@"Аудиозаписи";
     }
     return balls;
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    [_avatar setFrame:CGRectMake(10, 10, 40, 40)];
+    [_name sizeToFit];
+    [_name setFrame:CGRectMake(CGRectGetMaxX(_avatar.frame) + 10, 8, screenWidth - (CGRectGetMaxX(_avatar.frame) + 5) - 45, _name.frame.size.height)];
+    [_numberOfSounds setFrame:CGRectMake(CGRectGetMaxX(_avatar.frame) + 10, CGRectGetMaxY(_name.frame) + 5, _numberOfSounds.frame.size.width, _numberOfSounds.frame.size.height)];
+    [_separator setFrame:CGRectMake(0, 59.5, screenWidth, 0.5)];
+    [_searchButton setFrame:CGRectMake(screenWidth - 40, 10, 40, 40)];
+    
 }
 
 @end
